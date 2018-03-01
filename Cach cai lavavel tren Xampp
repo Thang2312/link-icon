@@ -1,0 +1,26 @@
+CÁCH CÀI ĐẶT LARAVEL VỚI XAMPP TRÊN UBUNTU
+
+Bước 1: Cài xampp
+Các bạn tải xampp tại địa chỉ này.
+Nhấn Ctrl+Alt+T để mở Terminal, lần lượt gõ các lệnh sau:
+cd Downloads
+sudo chmod +x tênfilexamppđãtải #đây là lệnh cấp quyền chạy cho file
+sudo ./tênfile 
+Tiếp theo khi màn hình cài đặt hiện lên thì bạn cứ nhấn next.
+Bình thường theo mặc định thì code đều để trong thư mục htdocs mới chạy được, để có thể chạy được ở code ở nơi khác bạn làm như sau:
+Tạo thư mục mới, ví dụ web với đường dẫn như sau: /home/quy/web.
+Sau đó, dùng lệnh: sudo gedit /opt/lampp/etc/httpd.conf để mở file cấu hình lên.
+Tìm đến dòng DocumentRoot sửa lại đường dẫn thành đường dẫn của thư mục mà bạn vừa tạo, ví dụ DocumentRoot "/home/quy/web" và sửa cả dòng <Directory "/home/quy/web">
+Restart lại xampp bằng lệnh: sudo /opt/lampp/lampp restart 
+Ok rồi đó, giờ bạn có thể để code trong thư mục mới mà nó vẫn chạy ngon ơ.
+
+Bước 2. Cài đặt Laravel
+Đầu tiên thêm biến môi trường, các bạn mở file environment bằng lệnh sudo gedit /etc/environment, sau đó thêm :/opt/lampp/bin/php vào cuối file, lưu lại.
+Chạy lệnh: sudo ln -s /opt/lampp/bin/php /usr/local/bin/php
+Tiếp theo chúng ta sẽ cài đặt composer:
+Gõ lệnh curl -sS https://getcomposer.org/installer | php.
+(Nếu chưa có tiện ích curl thì bạn có thể cài bằng lệnh: sudo apt-get install -y curl sau đó chạy lại lệnh trên)
+Gõ lệnh: sudo mv composer.phar /usr/local/bin/composer
+Giờ hãy tạo một project mới bằng lệnh sau: 
+composer create-project laravel/laravel blog "5.1.*"
+Sau đó vào trong project vừa tạo bằng lệnh cd blog, tiếp tục gõ lệnh để bật localhost lên: php artisan serve
